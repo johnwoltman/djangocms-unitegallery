@@ -1,4 +1,4 @@
-// Unite Gallery, Version: 1.7.14, released 03 Mar 2016 
+// Unite Gallery, Version: 1.7.40, released 29 Nov 2016 
 
 
 
@@ -216,7 +216,6 @@ function UGFunctions(){
 	}
 	
 	
-	this.z__________END_FULL_SCREEN___________ = function(){}
 	
 	this.z__________GET_PROPS___________ = function(){}
 	
@@ -698,9 +697,7 @@ function UGFunctions(){
 		return(pos);
 	}
 	
-	
-	this.z__________END_GET_PROPS___________ = function(){}
-	
+		
 	
 	this.z_________SET_ELEMENT_PROPS_______ = function(){}
 		
@@ -1006,15 +1003,18 @@ function UGFunctions(){
 		if(obj.imageLeft !== null){
 			obj.style += "left:"+obj.imageLeft+"px;";
 		}
-				
+		
+		urlImage = t.escapeDoubleSlash(urlImage);
+		
 		htmlImage += " style='"+obj.style+"'";
-		htmlImage += " src='"+urlImage+"'";
+		htmlImage += " src=\""+urlImage+"\"";
 		htmlImage += ">";
 				
 		objParent.html(htmlImage);
 		
 		//return the image just created
 		var objImage = objParent.children("img");
+		
 		return(objImage);
 	}
 	
@@ -1103,7 +1103,7 @@ function UGFunctions(){
 			updateCss = true;		
 			objCss.left = obj.imageLeft+"px";
 		}
-				
+			
 		if(updateCss == true){
 			
 			objCss.position = "absolute";
@@ -1111,7 +1111,9 @@ function UGFunctions(){
 			
 			objImage.css(objCss);			
 		}
-				
+		
+		
+		return(obj);
 	}
 	
 	
@@ -1204,6 +1206,12 @@ function UGFunctions(){
 				
 		objImage.css(objCss);
 		
+		//return size object
+		
+		var objReturn = {};
+		objReturn["imageWidth"] = imageWidth;
+		objReturn["imageHeight"] = imageHeight;
+		return(objReturn);
 	}
 	
 	
@@ -1222,9 +1230,7 @@ function UGFunctions(){
 			
 	}
 	
-	
-	this.z_________END_SET_ELEMENT_PROPS_______ = function(){}
-	
+		
 	this.z_________GALLERY_RELATED_FUNCTIONS_______ = function(){}
 	
 	/**
@@ -1292,7 +1298,6 @@ function UGFunctions(){
 	}
 	
 	
-	this.z_________END_GALLERY_RELATED_FUNCTIONS_______ = function(){}
 
 	this.z_________MATH_FUNCTIONS_______ = function(){}
 	
@@ -1461,6 +1466,7 @@ function UGFunctions(){
 	
 	
 	this.z_________DATA_FUNCTIONS_______ = function(){}
+	
 	
 	/**
 	 * set data value
@@ -1706,15 +1712,6 @@ function UGFunctions(){
 	}
 	
 	
-	/**
-	 * check if it's a desctop devide
-	 */
-	this.isDesktopDevice = function(){
-		
-		var isDesktop = typeof window.screenX !== undefined && !t.isTouchDevice() ? true : false;		
-		
-		return(isDesktop);
-	}
 	
 	/**
 	 * check if 
@@ -1738,6 +1735,7 @@ function UGFunctions(){
 	}
 	
 	this.z_________GENERAL_FUNCTIONS_______ = function(){}
+	
 	
 	/**
 	 * check if current jquery version is more then minimal version
@@ -2262,6 +2260,15 @@ function UGFunctions(){
 	
 	
 	/**
+	 * escape double slash
+	 */
+	this.escapeDoubleSlash = function(str){
+		
+		return str.replace('"','\"');
+	}
+	
+	
+	/**
 	 * html entitles
 	 */
 	this.htmlentitles = function(html){
@@ -2289,13 +2296,7 @@ var g_ugFunctions = new UGFunctions();
 
 /** -------------- EASING FUNCTIONS ---------------------*/
 
-//   swing, easeInQuad, easeOutQuad, easeInOutQuad, easeInCubic, easeOutCubic, easeInOutCubic, 
-//   easeInQuart, easeOutQuart, easeInOutQuart, easeInQuint, easeOutQuint, easeInOutQuint, easeInSine, 
-//   easeOutSine, easeInOutSine, easeInExpo, easeOutExpo, easeInOutExpo, easeInCirc, easeOutCirc, easeInOutCirc, 
-//   easeInElastic, easeOutElastic, easeInOutElastic, easeInBack, easeOutBack, easeInOutBack, easeInBounce, easeOutBounce, easeInOutBounce
-
-jQuery.easing.jswing=jQuery.easing.swing,jQuery.extend(jQuery.easing,{def:"easeOutQuad",swing:function(n,e,t,u,a){return jQuery.easing[jQuery.easing.def](n,e,t,u,a)},easeInQuad:function(n,e,t,u,a){return u*(e/=a)*e+t},easeOutQuad:function(n,e,t,u,a){return-u*(e/=a)*(e-2)+t},easeInOutQuad:function(n,e,t,u,a){return(e/=a/2)<1?u/2*e*e+t:-u/2*(--e*(e-2)-1)+t},easeInCubic:function(n,e,t,u,a){return u*(e/=a)*e*e+t},easeOutCubic:function(n,e,t,u,a){return u*((e=e/a-1)*e*e+1)+t},easeInOutCubic:function(n,e,t,u,a){return(e/=a/2)<1?u/2*e*e*e+t:u/2*((e-=2)*e*e+2)+t},easeInQuart:function(n,e,t,u,a){return u*(e/=a)*e*e*e+t},easeOutQuart:function(n,e,t,u,a){return-u*((e=e/a-1)*e*e*e-1)+t},easeInOutQuart:function(n,e,t,u,a){return(e/=a/2)<1?u/2*e*e*e*e+t:-u/2*((e-=2)*e*e*e-2)+t},easeInQuint:function(n,e,t,u,a){return u*(e/=a)*e*e*e*e+t},easeOutQuint:function(n,e,t,u,a){return u*((e=e/a-1)*e*e*e*e+1)+t},easeInOutQuint:function(n,e,t,u,a){return(e/=a/2)<1?u/2*e*e*e*e*e+t:u/2*((e-=2)*e*e*e*e+2)+t},easeInSine:function(n,e,t,u,a){return-u*Math.cos(e/a*(Math.PI/2))+u+t},easeOutSine:function(n,e,t,u,a){return u*Math.sin(e/a*(Math.PI/2))+t},easeInOutSine:function(n,e,t,u,a){return-u/2*(Math.cos(Math.PI*e/a)-1)+t},easeInExpo:function(n,e,t,u,a){return 0==e?t:u*Math.pow(2,10*(e/a-1))+t},easeOutExpo:function(n,e,t,u,a){return e==a?t+u:u*(-Math.pow(2,-10*e/a)+1)+t},easeInOutExpo:function(n,e,t,u,a){return 0==e?t:e==a?t+u:(e/=a/2)<1?u/2*Math.pow(2,10*(e-1))+t:u/2*(-Math.pow(2,-10*--e)+2)+t},easeInCirc:function(n,e,t,u,a){return-u*(Math.sqrt(1-(e/=a)*e)-1)+t},easeOutCirc:function(n,e,t,u,a){return u*Math.sqrt(1-(e=e/a-1)*e)+t},easeInOutCirc:function(n,e,t,u,a){return(e/=a/2)<1?-u/2*(Math.sqrt(1-e*e)-1)+t:u/2*(Math.sqrt(1-(e-=2)*e)+1)+t},easeInElastic:function(n,e,t,u,a){var r=1.70158,i=0,s=u;if(0==e)return t;if(1==(e/=a))return t+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;var r=i/4}else var r=i/(2*Math.PI)*Math.asin(u/s);return-(s*Math.pow(2,10*(e-=1))*Math.sin(2*(e*a-r)*Math.PI/i))+t},easeOutElastic:function(n,e,t,u,a){var r=1.70158,i=0,s=u;if(0==e)return t;if(1==(e/=a))return t+u;if(i||(i=.3*a),s<Math.abs(u)){s=u;var r=i/4}else var r=i/(2*Math.PI)*Math.asin(u/s);return s*Math.pow(2,-10*e)*Math.sin(2*(e*a-r)*Math.PI/i)+u+t},easeInOutElastic:function(n,e,t,u,a){var r=1.70158,i=0,s=u;if(0==e)return t;if(2==(e/=a/2))return t+u;if(i||(i=.3*a*1.5),s<Math.abs(u)){s=u;var r=i/4}else var r=i/(2*Math.PI)*Math.asin(u/s);return 1>e?-.5*s*Math.pow(2,10*(e-=1))*Math.sin(2*(e*a-r)*Math.PI/i)+t:s*Math.pow(2,-10*(e-=1))*Math.sin(2*(e*a-r)*Math.PI/i)*.5+u+t},easeInBack:function(n,e,t,u,a,r){return void 0==r&&(r=1.70158),u*(e/=a)*e*((r+1)*e-r)+t},easeOutBack:function(n,e,t,u,a,r){return void 0==r&&(r=1.70158),u*((e=e/a-1)*e*((r+1)*e+r)+1)+t},easeInOutBack:function(n,e,t,u,a,r){return void 0==r&&(r=1.70158),(e/=a/2)<1?u/2*e*e*(((r*=1.525)+1)*e-r)+t:u/2*((e-=2)*e*(((r*=1.525)+1)*e+r)+2)+t},easeInBounce:function(n,e,t,u,a){return u-jQuery.easing.easeOutBounce(n,a-e,0,u,a)+t},easeOutBounce:function(n,e,t,u,a){return(e/=a)<1/2.75?7.5625*u*e*e+t:2/2.75>e?u*(7.5625*(e-=1.5/2.75)*e+.75)+t:2.5/2.75>e?u*(7.5625*(e-=2.25/2.75)*e+.9375)+t:u*(7.5625*(e-=2.625/2.75)*e+.984375)+t},easeInOutBounce:function(n,e,t,u,a){return a/2>e?.5*jQuery.easing.easeInBounce(n,2*e,0,u,a)+t:.5*jQuery.easing.easeOutBounce(n,2*e-a,0,u,a)+.5*u+t}});
-
+(function(factory){if(typeof define==="function"&&define.amd){define(["jquery"],function($){return factory($)})}else if(typeof module==="object"&&typeof module.exports==="object"){exports=factory(require("jquery"))}else{factory(jQuery)}})(function($){$.easing["jswing"]=$.easing["swing"];var pow=Math.pow,sqrt=Math.sqrt,sin=Math.sin,cos=Math.cos,PI=Math.PI,c1=1.70158,c2=c1*1.525,c3=c1+1,c4=2*PI/3,c5=2*PI/4.5;function bounceOut(x){var n1=7.5625,d1=2.75;if(x<1/d1){return n1*x*x}else if(x<2/d1){return n1*(x-=1.5/d1)*x+.75}else if(x<2.5/d1){return n1*(x-=2.25/d1)*x+.9375}else{return n1*(x-=2.625/d1)*x+.984375}}$.extend($.easing,{def:"easeOutQuad",swing:function(x){return $.easing[$.easing.def](x)},easeInQuad:function(x){return x*x},easeOutQuad:function(x){return 1-(1-x)*(1-x)},easeInOutQuad:function(x){return x<.5?2*x*x:1-pow(-2*x+2,2)/2},easeInCubic:function(x){return x*x*x},easeOutCubic:function(x){return 1-pow(1-x,3)},easeInOutCubic:function(x){return x<.5?4*x*x*x:1-pow(-2*x+2,3)/2},easeInQuart:function(x){return x*x*x*x},easeOutQuart:function(x){return 1-pow(1-x,4)},easeInOutQuart:function(x){return x<.5?8*x*x*x*x:1-pow(-2*x+2,4)/2},easeInQuint:function(x){return x*x*x*x*x},easeOutQuint:function(x){return 1-pow(1-x,5)},easeInOutQuint:function(x){return x<.5?16*x*x*x*x*x:1-pow(-2*x+2,5)/2},easeInSine:function(x){return 1-cos(x*PI/2)},easeOutSine:function(x){return sin(x*PI/2)},easeInOutSine:function(x){return-(cos(PI*x)-1)/2},easeInExpo:function(x){return x===0?0:pow(2,10*x-10)},easeOutExpo:function(x){return x===1?1:1-pow(2,-10*x)},easeInOutExpo:function(x){return x===0?0:x===1?1:x<.5?pow(2,20*x-10)/2:(2-pow(2,-20*x+10))/2},easeInCirc:function(x){return 1-sqrt(1-pow(x,2))},easeOutCirc:function(x){return sqrt(1-pow(x-1,2))},easeInOutCirc:function(x){return x<.5?(1-sqrt(1-pow(2*x,2)))/2:(sqrt(1-pow(-2*x+2,2))+1)/2},easeInElastic:function(x){return x===0?0:x===1?1:-pow(2,10*x-10)*sin((x*10-10.75)*c4)},easeOutElastic:function(x){return x===0?0:x===1?1:pow(2,-10*x)*sin((x*10-.75)*c4)+1},easeInOutElastic:function(x){return x===0?0:x===1?1:x<.5?-(pow(2,20*x-10)*sin((20*x-11.125)*c5))/2:pow(2,-20*x+10)*sin((20*x-11.125)*c5)/2+1},easeInBack:function(x){return c3*x*x*x-c1*x*x},easeOutBack:function(x){return 1+c3*pow(x-1,3)+c1*pow(x-1,2)},easeInOutBack:function(x){return x<.5?pow(2*x,2)*((c2+1)*2*x-c2)/2:(pow(2*x-2,2)*((c2+1)*(x*2-2)+c2)+2)/2},easeInBounce:function(x){return 1-bounceOut(1-x)},easeOutBounce:bounceOut,easeInOutBounce:function(x){return x<.5?(1-bounceOut(1-2*x))/2:(1+bounceOut(2*x-1))/2}})});
 
 /** -------------- JQuery Color Animations ---------------------*/
 
@@ -2310,7 +2311,8 @@ jQuery.easing.jswing=jQuery.easing.swing,jQuery.extend(jQuery.easing,{def:"easeO
 /**
  * ismouseover function - check if the mouse over some object
  */
-!function(t){function e(){var i=this===document?t(this):t(this).contents();i.mousemove(function(e){t.mlp={x:e.pageX,y:e.pageY}}),i.find("iframe").load(e)}t.mlp={x:0,y:0},t(e),t.fn.ismouseover=function(){var e=!1;return this.eq(0).each(function(){var i=t(this).is("iframe")?t(this).contents().find("body"):t(this),n=i.offset();e=n.left<=t.mlp.x&&n.left+i.outerWidth()>t.mlp.x&&n.top<=t.mlp.y&&n.top+i.outerHeight()>t.mlp.y}),e}}(jQuery);
+!function(t){function e(){try{var i=this===document?t(this):t(this).contents();}catch(error){return(false);}i.mousemove(function(e){t.mlp={x:e.pageX,y:e.pageY}}),i.find("iframe").on("load",e)}t.mlp={x:0,y:0},t(e),t.fn.ismouseover=function(){var e=!1;return this.eq(0).each(function(){var i=t(this).is("iframe")?t(this).contents().find("body"):t(this),n=i.offset();e=n.left<=t.mlp.x&&n.left+i.outerWidth()>t.mlp.x&&n.top<=t.mlp.y&&n.top+i.outerHeight()>t.mlp.y}),e}}(jQuery);
+
 
 
 function UGThumbsGeneral(){
@@ -2452,7 +2454,7 @@ function UGThumbsGeneral(){
 				 var objThumbWrapper = jQuery(htmlThumb);
 				 
 				 var objImage = objItem.objThumbImage;
-				 
+				
 				 if(g_temp.customThumbs == false){
  				 
 					 if(g_options.thumb_show_loader == true && objImage){
@@ -2790,6 +2792,8 @@ function UGThumbsGeneral(){
 			}
 			else{
 				
+				//variant size
+				
 				if(g_options.thumb_resize_by == "height")	//horizontal strip
 					g_functions.scaleImageByHeight(objImage, g_options.thumb_height);
 				else		//vertical strip
@@ -2925,6 +2929,7 @@ function UGThumbsGeneral(){
 		 */
 		function onMouseOver(objThumb){
 			
+			
 			//if touch enabled unbind event
 			if(g_temp.touchEnabled == true){
 				objThumbs.off("mouseenter").off("mouseleave");
@@ -2995,7 +3000,7 @@ function UGThumbsGeneral(){
 			objItem.isThumbImageLoaded = true;
 			
 			var objSize = g_functions.getImageOriginalSize(objImage);
-						
+			
 			objItem.thumbWidth = objSize.width;
 			objItem.thumbHeight = objSize.height;
 			objItem.thumbRatioByWidth = objSize.width / objSize.height;
@@ -3355,7 +3360,8 @@ function UGThumbsStrip(){
 	}
 	
 	this.events = {		//events variables
-			STRIP_MOVE:"stripmove"
+			STRIP_MOVE:"stripmove",
+			INNER_SIZE_CHANGE:"size_change"
 	}	
 	
 	//the defaults for vertical align
@@ -3555,6 +3561,8 @@ function UGThumbsStrip(){
 		g_sizes.stripInnerSize = innerSize;
 		
 		checkControlsEnableDisable();
+		
+		jQuery(t).trigger(t.events.INNER_SIZE_CHANGE);
 	}
 	
 	
@@ -4223,7 +4231,7 @@ function UGThumbsStrip(){
 	 * resize the panel according the orientation
 	 */
 	this.resize = function(newSize){
-				
+		
 		if(g_isVertical == false){
 			
 			g_objStrip.width(newSize);
@@ -5526,7 +5534,7 @@ function UGStripPanel() {
 	 * validate panel before run
 	 */
 	function validatePanelBeforeRun() {
-				
+		
 		if (g_options.strippanel_vertical_type == false) { // horizontal
 															// validate
 			if (g_temp.panelWidth == 0) {
@@ -5830,7 +5838,7 @@ function UGStripPanel() {
 	 * check buttons if they need to be disabled or not
 	 */
 	function checkSideButtons() {
-
+				
 		if (!g_objButtonNext)
 			return (true);
 
@@ -5840,11 +5848,11 @@ function UGStripPanel() {
 			g_functions.disableButton(g_objButtonNext);
 			return (true);
 		}
-
+		
 		// check the limits
 		var limits = g_objStrip.getInnerStripLimits();
 		var pos = g_objStrip.getInnerStripPos();
-
+		
 		if (pos >= limits.maxPos) {
 			g_functions.disableButton(g_objButtonPrev);
 		} else {
@@ -5893,7 +5901,7 @@ function UGStripPanel() {
 			return (false);
 		
 		g_temp.isEventsInited = true;
-				
+		
 		// buttons events
 		if (g_objButtonNext) {
 
@@ -5907,14 +5915,17 @@ function UGStripPanel() {
 
 			// add disable / enable buttons on strip move event
 			if (g_options.strippanel_buttons_role != "advance_item") {
-				jQuery(g_objStrip)
-						.on(g_objStrip.events.STRIP_MOVE, onStripMove);
+				
+				jQuery(g_objStrip).on(g_objStrip.events.STRIP_MOVE, onStripMove);
+				
+				jQuery(g_objStrip).on(g_objStrip.events.INNER_SIZE_CHANGE, checkSideButtons);
+				
 				g_objGallery.on(g_gallery.events.SIZE_CHANGE, checkSideButtons);
+				
 			} else {
 				var galleryOptions = g_gallery.getOptions();
 				if (galleryOptions.gallery_carousel == false)
-					jQuery(g_gallery).on(g_gallery.events.ITEM_CHANGE,
-							onItemChange);
+					jQuery(g_gallery).on(g_gallery.events.ITEM_CHANGE, onItemChange);
 			}
 
 		}
@@ -7013,9 +7024,11 @@ function UGThumbsGrid(){
 	var g_options = {
 		grid_panes_direction: "left",				//where panes will move -> left, bottom
 		grid_num_cols: 2,							//number of grid columns
+		grid_min_cols: 2,							//minimum number of columns (for horizontal type) - the tile size is dynamic 
 		grid_num_rows: 2,							//number of grid rows (for horizontal type)
 		grid_space_between_cols: 10,				//space between columns
 		grid_space_between_rows: 10,				//space between rows
+		grid_space_between_mobile: 10,				//space between rows and cols mobile
 		grid_transition_duration: 300,				//transition of the panes change duration 
 		grid_transition_easing: "easeInOutQuad",	//transition of the panes change easing function
 		grid_carousel: false,						//next pane goes to first when last
@@ -7046,7 +7059,11 @@ function UGThumbsGrid(){
 			startScrollPos:0,
 			isFirstTimeRun:true,
 			isTilesMode: false,
-			storedEventID: "thumbsgrid"
+			storedEventID: "thumbsgrid",
+			tileMaxWidth:null,
+			tileMaxHeight:null,
+			spaceBetweenCols: null,
+			spaceBetweenRows: null
 		};
 	
 	
@@ -7065,7 +7082,7 @@ function UGThumbsGrid(){
 		g_objGallery = jQuery(gallery);
 		g_objWrapper = g_objects.g_objWrapper;
 		g_arrItems = g_objects.g_arrItems;
-				
+		
 		if(isTilesMode === true)
 			g_temp.isTilesMode = true;
 		
@@ -7073,14 +7090,15 @@ function UGThumbsGrid(){
 		
 		setOptions(customOptions);
 		
-		//set vertical or horizon
-		g_temp.isNavigationVertical = (g_options.grid_panes_direction == "top" || g_options.grid_panes_direction == "bottom")
-		
 		if(g_temp.isTilesMode == true){
 			
 			g_tilesDesign.setFixedMode();
 			g_tilesDesign.setApproveClickFunction(isApproveTileClick);
 			g_tilesDesign.init(gallery, g_options);
+			
+			var options_td = g_tilesDesign.getOptions();
+			g_temp.tileMaxHeight = options_td.tile_height;
+			g_temp.tileMaxWidth = options_td.tile_width;
 			
 			g_thumbs = g_tilesDesign.getObjThumbs();
 		}else{
@@ -7149,13 +7167,27 @@ function UGThumbsGrid(){
 						
 			if(g_temp.isTilesMode == true){
 				
-				initSizeParams();							
+				initGridDynamicSize();
+				initSizeParams();					
 				g_tilesDesign.run();
 				
 			}else{
 				g_thumbs.setHtmlProperties();
 				initSizeParams();			
 				g_thumbs.loadThumbsImages();
+			}
+			
+		}else{
+			
+			if(g_temp.isTilesMode == true){
+				
+				//check if dynamic size changed. If do, run the thumbs again
+				var isChanged = initGridDynamicSize();
+				
+				if(isChanged == true){
+					initSizeParams();					
+					g_tilesDesign.run();
+				}
 			}
 			
 		}
@@ -7196,23 +7228,70 @@ function UGThumbsGrid(){
 		return(objThumbSize);
 	}
 	
+	
+	/**
+	 * init grid dynamic size (tiles mode)
+	 */
+	function initGridDynamicSize(){
+		
+		if(g_temp.isTilesMode == false)
+			throw new Error("Dynamic size can be set only in tiles mode");
+		
+		var isChanged = false;
+		var isMobile = g_gallery.isMobileMode();
+		
+		//--- set space between cols and rows
+		
+		var spaceOld = g_temp.spaceBetweenCols;
+		
+		if(isMobile == true){
+			g_temp.spaceBetweenCols = g_options.grid_space_between_mobile;
+			g_temp.spaceBetweenRows = g_options.grid_space_between_mobile;
+		}else{
+			g_temp.spaceBetweenCols = g_options.grid_space_between_cols;
+			g_temp.spaceBetweenRows = g_options.grid_space_between_rows;
+		}
+		
+		if(g_temp.spaceBetweenCols != spaceOld)
+			isChanged = true;
+		
+		//set tile size
+		
+		var lastThumbSize = getThumbsSize();
+		var lastThumbWidth = lastThumbSize.width;
+		
+		var tileWidth = g_temp.tileMaxWidth;
+		var numCols = g_functions.getNumItemsInSpace(g_temp.gridWidth, g_temp.tileMaxWidth, g_temp.spaceBetweenCols);
+		
+		if(numCols < g_options.grid_min_cols){
+			tileWidth = g_functions.getItemSizeInSpace(g_temp.gridWidth, g_options.grid_min_cols, g_temp.spaceBetweenCols);
+		}
+		
+		g_tilesDesign.setTileSizeOptions(tileWidth);
+		
+		if(tileWidth != lastThumbWidth)
+			isChanged = true;
+		
+		
+		return(isChanged);
+	}
+	
+	
 	/**
 	 * init grid size horizontal
 	 * get height param
 	 */
 	function initSizeParamsHor(){
-		
+				
 		var objThumbSize = getThumbsSize();
 		
 		var thumbsHeight = objThumbSize.height;
 		
-		
 		//set grid size
 		var gridWidth = g_temp.gridWidth;
-		var gridHeight = g_options.grid_num_rows * thumbsHeight + (g_options.grid_num_rows-1) * g_options.grid_space_between_rows + g_options.grid_padding*2;
+		var gridHeight = g_options.grid_num_rows * thumbsHeight + (g_options.grid_num_rows-1) * g_temp.spaceBetweenRows + g_options.grid_padding*2;
 		
 		g_temp.gridHeight = gridHeight;
-		
 		
 		g_functions.setElementSize(g_objGrid, gridWidth, gridHeight);
 	
@@ -7235,7 +7314,7 @@ function UGThumbsGrid(){
 		var thumbsWidth = objThumbSize.width;
 		
 		//set grid size
-		var gridWidth = g_options.grid_num_cols * thumbsWidth + (g_options.grid_num_cols-1) * g_options.grid_space_between_cols + g_options.grid_padding*2;
+		var gridWidth = g_options.grid_num_cols * thumbsWidth + (g_options.grid_num_cols-1) * g_temp.spaceBetweenCols + g_options.grid_padding*2;
 		var gridHeight = g_temp.gridHeight;
 		
 		g_temp.gridWidth = gridWidth;
@@ -7278,6 +7357,7 @@ function UGThumbsGrid(){
 				
 	}
 	
+	
 	/**
 	 * set the options of the strip
 	 */
@@ -7286,6 +7366,13 @@ function UGThumbsGrid(){
 		g_options = jQuery.extend(g_options, objOptions);
 		
 		g_thumbs.setOptions(objOptions);
+		
+		//set vertical or horizon
+		g_temp.isNavigationVertical = (g_options.grid_panes_direction == "top" || g_options.grid_panes_direction == "bottom")
+		
+		g_temp.spaceBetweenCols = g_options.grid_space_between_cols;
+		g_temp.spaceBetweenRows = g_options.grid_space_between_rows;
+		
 	}
 	
 	
@@ -7332,12 +7419,12 @@ function UGThumbsGrid(){
 			if(endX > g_temp.innerWidth)
 				g_temp.innerWidth = endX;
 						
-			posx += thumbWidth + g_options.grid_space_between_cols;
+			posx += thumbWidth + g_temp.spaceBetweenCols;
 			
 			//next row
 			counter++;
 			if(counter >= g_options.grid_num_cols){
-				posy += thumbHeight + g_options.grid_space_between_rows;
+				posy += thumbHeight + g_temp.spaceBetweenRows;
 				posx = baseX;
 				counter = 0;
 			}
@@ -7349,7 +7436,7 @@ function UGThumbsGrid(){
 			//prepare next pane
 			if((posy + thumbHeight) > g_temp.gridHeight){
 				posy = 0;
-				baseX = g_temp.innerWidth + g_options.grid_space_between_cols;
+				baseX = g_temp.innerWidth + g_temp.spaceBetweenCols;
 				posx = baseX;
 				counter = 0;
 								
@@ -7369,6 +7456,7 @@ function UGThumbsGrid(){
 				}
 			}
 		}
+		
 		
 		//set inner strip width and height
 		g_objInner.width(g_temp.innerWidth);
@@ -7412,7 +7500,7 @@ function UGThumbsGrid(){
 			var thumbWidth = objThumb.outerWidth();
 			var thumbHeight = objThumb.outerHeight();
 									
-			posx += thumbWidth + g_options.grid_space_between_cols;
+			posx += thumbWidth + g_temp.spaceBetweenCols;
 			
 			var endy = (posy + thumbHeight);
 			if(endy > maxy)
@@ -7421,7 +7509,7 @@ function UGThumbsGrid(){
 			//next row
 			counter++;
 			if(counter >= g_options.grid_num_cols){
-				posy += thumbHeight + g_options.grid_space_between_rows;
+				posy += thumbHeight + g_temp.spaceBetweenRows;
 				posx = baseX;
 				counter = 0;
 			}
@@ -7444,7 +7532,7 @@ function UGThumbsGrid(){
 					paneMaxY = g_temp.gridHeight;
 				}
 				
-				posy = paneMaxY + g_options.grid_space_between_rows;					
+				posy = paneMaxY + g_temp.spaceBetweenRows;					
 				paneStartY = posy;
 				baseX = 0;
 				posx = baseX;
@@ -7474,6 +7562,7 @@ function UGThumbsGrid(){
 		
 	}
 
+	
 	/**
 	 * position the thumbs horizontal type
 	 */	
@@ -7485,7 +7574,7 @@ function UGThumbsGrid(){
 		var baseY = g_options.grid_padding;
 		var posy = baseY;
 		var posx = baseX;
-		var maxx = 0, maxy = 0, paneMaxY = 0;
+		var maxx = 0, maxy = 0, paneMaxY = 0, gridMaxY = 0;
 		var rowsCounter = 0;
 		
 		g_temp.innerWidth = 0;
@@ -7514,13 +7603,17 @@ function UGThumbsGrid(){
 					//change to a new pane					
 					rowsCounter = 0;
 					baseX = posx;
-					paneMaxY = 0;
 					posy = baseY;
+					paneMaxY = 0;
 					
 					//change grid width to max width
 					if(g_temp.numPanes == 1){
 						g_temp.gridWidth = maxx+g_options.grid_padding;
 						g_objGrid.width(g_temp.gridWidth);
+						
+						g_temp.gridHeight = gridMaxY + g_options.grid_padding;
+						g_objGrid.height(g_temp.gridHeight);
+						
 					}
 					
 					g_temp.numPanes++;
@@ -7528,7 +7621,7 @@ function UGThumbsGrid(){
 					
 				}else{			//start new line in existing pane
 					posx = baseX;
-					posy = paneMaxY + g_options.grid_space_between_rows;
+					posy = paneMaxY + g_temp.spaceBetweenRows;
 				}
 			}
 			
@@ -7543,9 +7636,12 @@ function UGThumbsGrid(){
 			//count maxy
 			var endY = posy + thumbHeight;
 			
-			if(endY > paneMaxY)
+			if(endY > paneMaxY)		//pane height
 				paneMaxY = endY;
-				
+			
+			if(endY > gridMaxY)		//total height
+				gridMaxY = endY;
+			
 			if(endY > maxy)
 				maxy = endY;
 			
@@ -7554,7 +7650,7 @@ function UGThumbsGrid(){
 			if(endX > g_temp.innerWidth)
 				g_temp.innerWidth = endX;
 						
-			posx += thumbWidth + g_options.grid_space_between_cols;
+			posx += thumbWidth + g_temp.spaceBetweenCols;
 						
 			//count number thumbs in pane
 			if(g_temp.numPanes == 1)
@@ -7564,20 +7660,23 @@ function UGThumbsGrid(){
 		}//end for
 		
 		//set inner strip width and height
-		g_temp.innerWidth = maxx;
-		g_temp.innerHeight = paneMaxY;
+		g_temp.innerWidth = maxx + g_options.grid_padding;
+		g_temp.innerHeight = gridMaxY + g_options.grid_padding;
 		
 		g_objInner.width(g_temp.innerWidth);
 		g_objInner.height(g_temp.innerHeight);
-		
+
+
 		//set grid height
 		if(g_temp.numPanes == 1){
 			g_temp.gridWidth = maxx + g_options.grid_padding;
-			g_temp.gridHeight = maxy + g_options.grid_padding;
+			g_temp.gridHeight = gridMaxY + g_options.grid_padding;
 			
 			g_objGrid.width(g_temp.gridWidth);
 			g_objGrid.height(g_temp.gridHeight);
+						
 		}
+		
 			
 	}
 	
@@ -8127,7 +8226,7 @@ function UGThumbsGrid(){
 		var numThumbs = g_thumbs.getNumThumbs();
 		var numRows = Math.ceil(numThumbs / g_options.grid_num_cols);
 		
-		var totalHeight = numRows * thumbHeight + (numRows-1) * g_options.grid_space_between_rows;
+		var totalHeight = numRows * thumbHeight + (numRows-1) * g_temp.spaceBetweenRows;
 			
 		var numPanes = Math.ceil(totalHeight / gridHeight);
 		
@@ -8149,7 +8248,7 @@ function UGThumbsGrid(){
 		var numThumbs = g_thumbs.getNumThumbs();
 		var numCols = Math.ceil(numThumbs / g_options.grid_num_rows);
 		
-		var totalWidth = numCols * thumbWidth + (numCols-1) * g_options.grid_space_between_cols;
+		var totalWidth = numCols * thumbWidth + (numCols-1) * g_temp.spaceBetweenCols;
 		
 		var numPanes = Math.ceil(totalWidth / gridWidth);
 				
@@ -8166,13 +8265,13 @@ function UGThumbsGrid(){
 			throw new Error("This function works only with tiles mode");
 		
 		var numThumbs = g_thumbs.getNumThumbs();
-		var numCols = g_functions.getNumItemsInSpace(width, g_options.tile_width, g_options.grid_space_between_cols);
+		var numCols = g_functions.getNumItemsInSpace(width, g_options.tile_width, g_temp.spaceBetweenCols);
 		var numRows = Math.ceil(numThumbs / numCols);
 		
 		if(numRows > g_options.grid_num_rows)
 			numRows = g_options.grid_num_rows;
 		
-		var gridHeight = g_functions.getSpaceByNumItems(numRows, g_options.tile_height, g_options.grid_space_between_rows);
+		var gridHeight = g_functions.getSpaceByNumItems(numRows, g_options.tile_height, g_temp.spaceBetweenRows);
 		gridHeight += g_options.grid_padding * 2;
 		
 		return(gridHeight);
@@ -8493,7 +8592,8 @@ function UGTiles(){
 	
 	this.events = {
 			THUMB_SIZE_CHANGE: "thumb_size_change",
-			TILES_FIRST_PLACED: "tiles_first_placed"		//only in case of justified
+			TILES_FIRST_PLACED: "tiles_first_placed",		//only in case of justified
+			ALL_TILES_LOADED: "all_tiles_loaded"
 	};
 	
 	var g_temp = {
@@ -8501,7 +8601,8 @@ function UGTiles(){
 			isFirstTimeRun:true,   //if run once
 			handle:null,		   //interval handle
 			isTransActive: false,  //is transition active
-			isTransInited: false  //if the transition function is set
+			isTransInited: false,  //if the transition function is set
+			isAllLoaded: false
 	};
 	
     var g_nestedWork = {
@@ -8832,7 +8933,7 @@ function UGTiles(){
 		if(g_vars.colHeights[numCol] !== undefined)
 			posy = g_vars.colHeights[numCol];
 		
-		var itemHeight = g_objTileDesign.getTileHeightByWidth(g_vars.colWidth, objTile);
+		var itemHeight = g_objTileDesign.getTileHeightByWidth(g_vars.colWidth, objTile, "placeTile");
 		
 		if(itemHeight === null){	//for custom html tile
 			if(g_options.tiles_enable_transition == true)
@@ -8853,7 +8954,7 @@ function UGTiles(){
 		//set max height
 		if(g_vars.maxColHeight < realHeight)
 			g_vars.maxColHeight = realHeight;
-				
+
 		if(toShow == true)
 			objTile.show().fadeTo(0,1);
 		
@@ -8878,7 +8979,7 @@ function UGTiles(){
 		
 		//do some operation before the transition
 		doBeforeTransition();
-
+		
 		//resize all thumbs
 		g_objTileDesign.resizeAllTiles(g_vars.colWidth, g_objTileDesign.resizemode.VISIBLE_ELEMENTS);
 		
@@ -8953,7 +9054,7 @@ function UGTiles(){
 		var col = g_functions.getColByIndex(g_vars.numCols, index);
 
 		var objItem = g_gallery.getItem(index);
-		
+				
 		g_objTileDesign.resizeTile(objTile, g_vars.colWidth);
 		
 		placeTile(objTile, true, true, col);
@@ -9007,8 +9108,10 @@ function UGTiles(){
 	 * run columns type
 	 */
 	function runColumnsType(){
-
+		
 		var objThumbs = g_thumbs.getThumbs();
+		
+		g_temp.isAllLoaded = false;
 		
 		fillTilesVars();
 		
@@ -9028,6 +9131,7 @@ function UGTiles(){
 		
 		objThumbs.fadeTo(0,0);
 		var objImages = jQuery(g_objParent).find("img.ug-thumb-image");
+
 		
 		if(g_temp.isFixedMode == true){		//fixed mode type - just place tiles before images loaded
 			
@@ -9037,6 +9141,7 @@ function UGTiles(){
 			
 			g_functions.checkImagesLoaded(objImages, function(){
 				setTransition();
+				g_objThis.trigger(t.events.ALL_TILES_LOADED);
 			});
 			
 		}else{	//dynamic size type
@@ -9055,6 +9160,8 @@ function UGTiles(){
 				}
 				
 				setTransition();
+				
+				g_objThis.trigger(t.events.ALL_TILES_LOADED);
 				
 			} ,function(objImage, isError){
 				
@@ -9287,6 +9394,8 @@ function UGTiles(){
 		
 		var objImages = jQuery(g_objWrapper).find("img.ug-thumb-image");
 		var objTiles = g_thumbs.getThumbs();
+
+		g_temp.isAllLoaded = false;
 		
 		objTiles.fadeTo(0,0);				
 		
@@ -9297,8 +9406,11 @@ function UGTiles(){
 				objTiles.fadeTo(0,1);
 				g_objThis.trigger(t.events.TILES_FIRST_PLACED);
 				setTransition();
+				
+				g_objThis.trigger(t.events.ALL_TILES_LOADED);
+				
 			});
-			
+						
 		}, function(objImage, isError){
 
 			objImage = jQuery(objImage);
@@ -9322,6 +9434,8 @@ function UGTiles(){
 
         var objImages = jQuery(g_objWrapper).find("img.ug-thumb-image");
         var objTiles = g_thumbs.getThumbs();
+
+        g_temp.isAllLoaded = false;
         
         objTiles.fadeTo(0, 0);
 
@@ -9335,6 +9449,8 @@ function UGTiles(){
             
             g_objThis.trigger(t.events.TILES_FIRST_PLACED);
             setTransition();
+			
+            g_objThis.trigger(t.events.ALL_TILES_LOADED);
 
         }, function (objImage, isError) {
 
@@ -9380,7 +9496,7 @@ function UGTiles(){
         g_nestedWork.gridY = 0;
         g_arrNestedItems = []
         
-        trace(g_nestedWork);
+        //trace(g_nestedWork);
         
     	var objTiles = g_thumbs.getThumbs();
 		objTiles.each(function(){
@@ -10100,7 +10216,10 @@ function UGTiles(){
 		
 		if(g_temp.isFirstTimeRun == true)
 			return(true);
-			
+		
+		if(g_temp.isAllLoaded == false)
+			return(false);
+		
 		switch(g_options.tiles_type){
 			case "columns":
 				placeTiles(false);
@@ -10128,8 +10247,18 @@ function UGTiles(){
 	 */
 	function initEvents(){
 		
-		g_objGallery.on(g_gallery.events.SIZE_CHANGE, onResize);
+		//only on first placed start size change event
+		g_objThis.on(t.events.ALL_TILES_LOADED, function(){
+						
+			if(g_temp.isAllLoaded == true)
+				return(true);
+			
+			g_temp.isAllLoaded = true;
+			
+		});
 		
+		g_objGallery.on(g_gallery.events.SIZE_CHANGE, onResize);
+				
 		g_objTileDesign.initEvents();
 				
 	}
@@ -10139,7 +10268,7 @@ function UGTiles(){
 	 * run the gallery after init and set html
 	 */
 	function run(){
-		
+				
 		//show tiles
 		g_objWrapper.children(".ug-tile").show();
 
@@ -10283,7 +10412,7 @@ function UGTileDesign(){
 			
 			tile_enable_icons: true,				//enable icons in mouseover mode
 			tile_show_link_icon: false,				//show link icon (if the tile has a link). In case of tile_as_link this option not enabled
-			tile_videoplay_icon_always_on: false,	//always show video play icon
+			tile_videoplay_icon_always_on: 'never',	//'always', 'never', 'mobile_only', 'desktop_only' always show video play icon
 			tile_space_between_icons: 26,			//initial space between icons, (on small tiles it may change)
 			
 			tile_enable_image_effect:false,			//enable tile image effect
@@ -10319,7 +10448,9 @@ function UGTileDesign(){
 		isSaparateIcons: false,
 		tileInnerReduce: 0,		//how much reduce from the tile inner elements from border mostly
 		isTextpanelOutside: false,	//is the textpanel is out of tile image border
-		hasImageContainer:false
+		hasImageContainer:false,
+		isVideoplayIconAlwaysOn:false,
+		isTextPanelHidden:false
 	};
 	
 	
@@ -10410,6 +10541,7 @@ function UGTileDesign(){
 		//set if the textpanel is enabled and outside
 		if(g_options.tile_enable_textpanel == true){
 			
+			//optimize for touch device
 			switch(g_options.tile_textpanel_position){
 				case "top":
 					g_options.tile_textpanel_align = "top";
@@ -10433,6 +10565,7 @@ function UGTileDesign(){
 			
 		}
 		
+		
 		//if the textpanel offset is not from the border, it's always fade.
 		if(g_options.tile_textpanel_offset != 0){
 			g_options.tile_textpanel_appear_type = "fade";
@@ -10447,6 +10580,43 @@ function UGTileDesign(){
 		
 	}
 	
+
+	/**
+	 * set options before render
+	 */
+	function modifyOptionsBeforeRender(){
+		
+		var isMobile = g_gallery.isMobileMode();
+		
+		//set text panel show / hide
+		
+		g_temp.isTextPanelHidden = false;
+		if(isMobile == true && g_options.tile_textpanel_always_on == false)
+			g_temp.isTextPanelHidden = true;
+		
+		
+		//set video icon always on true / false
+		
+		g_temp.isVideoplayIconAlwaysOn = g_options.tile_videoplay_icon_always_on;
+		
+		switch(g_options.tile_videoplay_icon_always_on){
+			case "always":
+				g_temp.isVideoplayIconAlwaysOn = true;
+			break;
+			case "never":
+				g_temp.isVideoplayIconAlwaysOn = false;
+			break;
+			case "mobile_only":
+				g_temp.isVideoplayIconAlwaysOn = (isMobile == true)?true:false;
+			break;
+			case "desktop_only":
+				g_temp.isVideoplayIconAlwaysOn = (isMobile == false)?true:false;
+			break;
+		}
+		
+		
+	}
+
 	
 	/**
 	 * set thumb html
@@ -10476,7 +10646,7 @@ function UGTileDesign(){
 		var imageAlt = g_functions.stripTags(objItem.title);
 		imageAlt = g_functions.htmlentitles(imageAlt);
 		
-		html += "<img src='"+objItem.urlThumb+"' alt='"+imageAlt+"' class='"+classImage+"'>";
+		html += "<img src=\""+g_functions.escapeDoubleSlash(objItem.urlThumb)+"\" alt='"+imageAlt+"' class='"+classImage+"'>";
 
 		if(g_temp.hasImageContainer == true){
 			html += "</div>";
@@ -10557,7 +10727,7 @@ function UGTileDesign(){
 			}
 		
 		var toSaparateIcon = g_temp.isSaparateIcons;
-		if(toSaparateIcon == false && objItem.type != "image" && g_options.tile_videoplay_icon_always_on == true)
+		if(toSaparateIcon == false && objItem.type != "image" && g_temp.isVideoplayIconAlwaysOn == true)
 			toSaparateIcon = true;
 		
 		if(toSaparateIcon)		//put the icons on the thumb
@@ -10603,7 +10773,7 @@ function UGTileDesign(){
 			var imageOverlayHtml = "<div class='ug-tile-image-overlay"+imageEffectClassAdd+"' >";
 			var imageEffectClass = " ug-"+g_options.tile_image_effect_type+"-effect";
 			
-			imageOverlayHtml += "<img src='"+objItem.urlThumb+"' alt='"+objItem.title+"' class='"+imageEffectClass + imageEffectClassAdd+"'>";
+			imageOverlayHtml += "<img src=\""+g_functions.escapeDoubleSlash(objItem.urlThumb)+"\" alt='"+objItem.title+"' class='"+imageEffectClass + imageEffectClassAdd+"'>";
 			imageOverlayHtml += "</div>";
 			
 			objThumbWrapper.append(imageOverlayHtml);
@@ -10818,14 +10988,14 @@ function UGTileDesign(){
 	/**
 	 * get tile ratio
 	 */
-	function getTileRatio(objTile){
-					
+	function getTileRatio(objTile, fromWhere){
+		
 		//global ratio
 		var ratio = g_temp.ratioByHeight;
 		
 		switch(g_options.tile_size_by){
 			default:		//global ratio
-				ratio = g_temp.ratioByHeight
+				ratio = g_temp.ratioByHeight;
 			break;
 			case t.sizeby.IMAGE_RATIO:
 
@@ -10835,7 +11005,7 @@ function UGTileDesign(){
 				var item = t.getItemByTile(objTile);
 								
 				if(typeof item.thumbRatioByHeight != "undefined"){
-				
+					
 					if(item.thumbRatioByHeight == 0){
 						trace(item);
 						throw new Error("the item ratio not inited yet");
@@ -10887,6 +11057,18 @@ function UGTileDesign(){
 		return objTile.hasClass("ug-tile-clickable");
 	}
 	
+	
+	/**
+	 * return if the items icon always on
+	 */
+	function isItemIconAlwaysOn(objItem){
+		
+		if(g_options.tile_enable_icons == true && g_temp.isVideoplayIconAlwaysOn == true && objItem.type != "image")
+			return(true);
+		
+		return(false);
+	}
+
 	
 	function _________________SETTERS________________(){};
 	
@@ -11021,7 +11203,6 @@ function UGTileDesign(){
 		if(g_temp.isTextpanelOutside == true)
 			panelHeight = getTextPanelHeight(objTile);
 		
-		
 		objTextPanel.refresh(false, true, panelWidth, panelHeight);
 		
 		var isPosition = (g_options.tile_textpanel_always_on == true || g_options.tile_textpanel_appear_type == "fade");
@@ -11074,7 +11255,7 @@ function UGTileDesign(){
 		if(objButtonZoom || objButtonLink){
 
 			var gapVert = 0;
-			if(g_options.tile_enable_textpanel == true && g_temp.isTextpanelOutside == false){
+			if( g_options.tile_enable_textpanel == true && g_temp.isTextPanelHidden == false && g_temp.isTextpanelOutside == false){
 				var objTextPanelElement = getTextPanelElement(objTile);
 				var texPanelSize = g_functions.getElementSize(objTextPanelElement);
 				if(texPanelSize.height > 0)
@@ -11082,7 +11263,6 @@ function UGTileDesign(){
 			}
 
 		}
-		
 		
 		if(objButtonZoom && objButtonLink){
 			var sizeZoom = g_functions.getElementSize(objButtonZoom);
@@ -11127,6 +11307,9 @@ function UGTileDesign(){
 	 */
 	this.setHtml = function(objParent){
 		g_objParentWrapper = objParent;
+		
+		modifyOptionsBeforeRender();
+		
 		g_thumbs.setHtmlThumbs(objParent);
 	}
 	
@@ -11146,7 +11329,7 @@ function UGTileDesign(){
 			var objThumbImage = t.getTileImage(objTile);
 			
 			if(isActive){
-				objThumbImage.fadeTo(1,1);			
+				objThumbImage.fadeTo(0,1);			
 				objOverlayImage.stop(true).fadeTo(animationDuration, 0);
 			}
 			else
@@ -11175,7 +11358,7 @@ function UGTileDesign(){
 		var objTextPanel = getTextPanelElement(objTile);
 		if(!objTextPanel)
 			return(true);
-
+				
 		if(g_options.tile_textpanel_appear_type == "slide"){
 			
 			var panelSize = g_functions.getElementSize(objTextPanel);
@@ -11192,13 +11375,15 @@ function UGTileDesign(){
 			
 			startClass[posName] = startPos+"px";
 			endClass[posName] = endPos+"px";
-			
+						
 			if(isActive == true){
 								
 				objTextPanel.fadeTo(0,1);
-									
+				
 				if(objTextPanel.is(":animated") == false)
 					objTextPanel.css(startClass);
+				
+				endClass["opacity"] = 1;
 					
 				objTextPanel.stop(true).animate(endClass, animationDuration);
 				
@@ -11236,23 +11421,25 @@ function UGTileDesign(){
 		
 		if(g_objIconZoom)
 			g_objIconZoom.stop(true).fadeTo(animationDuration, opacity);
+		
 		if(g_objIconLink)
 			g_objIconLink.stop(true).fadeTo(animationDuration, opacity);
 		
 	}
 	
 	
+	
 	/**
 	 * set tile over style
 	 */
 	function setOverStyle(data, objTile){
-		
+				
 		objTile = jQuery(objTile);
 				
 		if(g_options.tile_enable_image_effect)
 			setImageOverlayEffect(objTile, true);
 
-		if(g_options.tile_enable_textpanel == true && g_options.tile_textpanel_always_on == false)
+		if(g_options.tile_enable_textpanel == true && g_options.tile_textpanel_always_on == false && g_temp.isTextPanelHidden == false)
 			setTextpanelEffect(objTile, true);
 		
 		//show/hide icons - if saparate (if not, they are part of the overlay)
@@ -11261,8 +11448,9 @@ function UGTileDesign(){
 			var isSet = (g_options.thumb_overlay_reverse == true);
 			
 			var objItem = t.getItemByTile(objTile);
-			if( !(g_options.tile_videoplay_icon_always_on == true && objItem.type != "image"))
+			if(isItemIconAlwaysOn(objItem) == false)
 				setIconsEffect(objTile, isSet, false);
+			
 		}
 		
 	}
@@ -11273,19 +11461,26 @@ function UGTileDesign(){
 	 */
 	function setNormalStyle(data, objTile){
 		
-		
 		objTile = jQuery(objTile);
 		
 		if(g_options.tile_enable_image_effect)
 			setImageOverlayEffect(objTile, false);
-				
+		
 		if(g_options.tile_enable_textpanel == true && g_options.tile_textpanel_always_on == false)
 			setTextpanelEffect(objTile, false);
 		
 		//show/hide icons - if saparate (if not, they are part of the overlay)
 		if(g_temp.isSaparateIcons == true && g_options.tile_enable_icons == true){
+			
 			var isSet = (g_options.thumb_overlay_reverse == true)?false:true;
-			setIconsEffect(objTile, isSet, false);
+			
+			var objItem = t.getItemByTile(objTile);
+			if(isItemIconAlwaysOn(objItem) == false)
+				setIconsEffect(objTile, isSet, false);
+			else{	//make icon always appear
+				setIconsEffect(objTile, true, true);
+			}
+			
 		}
 		
 	}
@@ -11319,6 +11514,8 @@ function UGTileDesign(){
 			return(true);
 
 		positionElements(objTile);
+		
+		g_thumbs.setThumbNormalStyle(objTile);
 	}
 	
 	
@@ -11514,7 +11711,7 @@ function UGTileDesign(){
 	 * the resize mode taken from resize modes constants, default is full
 	 */
 	this.resizeTile = function(objTile, newWidth, newHeight, resizeMode){
-
+		
 			//if textpanel outside - refresh the textpanel first
 			if(g_temp.isTextpanelOutside == true)
 				positionElements_textpanel(objTile, "clone", newWidth);
@@ -11527,7 +11724,7 @@ function UGTileDesign(){
 			}else{		//only height is missing
 				if(!newHeight){
 					
-					var newHeight = t.getTileHeightByWidth(newWidth, objTile);
+					var newHeight = t.getTileHeightByWidth(newWidth, objTile, "resizeTile");
 				}
 			}
 						
@@ -11566,12 +11763,14 @@ function UGTileDesign(){
 	 * resize all tiles 
 	 */
 	this.resizeAllTiles = function(newWidth, resizeMode){
-				
+		
+		modifyOptionsBeforeRender();
+		
 		var newHeight = null;
 		
 		if(g_options.tile_size_by == t.sizeby.GLOBAL_RATIO)
-			newHeight = t.getTileHeightByWidth(newWidth);
-						
+			newHeight = t.getTileHeightByWidth(newWidth,null,"resizeAllTiles");
+		
 		var objTiles = g_thumbs.getThumbs();
 		objTiles.each(function(index, objTile){
 			t.resizeTile(jQuery(objTile), newWidth, newHeight, resizeMode);
@@ -11645,6 +11844,21 @@ function UGTileDesign(){
 	
 	
 	/**
+	 * set new tile size, this function will not resize, and keep ratio
+	 */
+	this.setTileSizeOptions = function(newTileWidth){
+		
+		if(g_options.tile_size_by !== t.sizeby.GLOBAL_RATIO)
+			throw new Error("setNewTileOptions works with global ration only");
+		
+		g_options.tile_width = newTileWidth;
+		g_options.tile_height = Math.floor(newTileWidth * g_temp.ratioByHeight);
+		
+		
+	}
+	
+	
+	/**
 	 * set custom tile html function
 	 */
 	this.setCustomFunctions = function(funcCustomHtml, funcPositionElements){
@@ -11657,7 +11871,8 @@ function UGTileDesign(){
 	 * run the tile design
 	 */
 	this.run = function(){
-				
+		
+		//resize all tiles
 		var objThumbs = g_thumbs.getThumbs();
 		
 		if(g_options.tile_size_by == t.sizeby.GLOBAL_RATIO){
@@ -11717,9 +11932,9 @@ function UGTileDesign(){
 	/**
 	 * get tile height by width
 	 */
-	this.getTileHeightByWidth = function(newWidth, objTile){
+	this.getTileHeightByWidth = function(newWidth, objTile, fromWhere){
 		
-		var ratio = getTileRatio(objTile);
+		var ratio = getTileRatio(objTile, fromWhere);
 		
 		if(ratio === null)
 			return(null);
@@ -11762,7 +11977,7 @@ function UGTileDesign(){
 				width: g_options.tile_width,
 				height: g_options.tile_height
 		};
-	
+		
 		return(objSize);
 	}
 	
@@ -12129,6 +12344,7 @@ function UGSlider(){
 		  slider_image_border_width: 10,				//image border width
 		  slider_image_border_color: "#ffffff",			//image border color
 		  slider_image_border_radius: 0,				//image border radius
+		  slider_image_border_maxratio: 0.35,			//max ratio that the border can take from the image
 		  slider_image_shadow: false,					//enable border shadow the image
 		  
 		  slider_video_constantsize: false, 			//constant video size mode for video items
@@ -12245,7 +12461,7 @@ function UGSlider(){
 	 */
 	function initSlider(objGallery, objOptions, optionsPrefix){
 		g_gallery = objGallery;
-		
+				
 		//change options by prefix
 		if(optionsPrefix){
 			g_optionsPrefix = optionsPrefix;
@@ -12265,7 +12481,7 @@ function UGSlider(){
 		if(g_options.slider_progress_indicator_type == "bar"){
 			g_options = jQuery.extend(g_options, g_defaultsProgressBar);
 		}
-		
+				
 		if(objOptions)
 			t.setOptions(objOptions);
 		
@@ -12711,16 +12927,64 @@ function UGSlider(){
 		objPreloader.stop(true).hide(100);
 	}
 	
+	/**
+	 * get proper image border width
+	 */
+	function getImageBorderWidth(objImage, imageData){
+		
+		var borderWidth = g_options.slider_image_border_width;
+		
+		if(borderWidth <= 10)
+			return(borderWidth);
+
+		//set image size
+		var imageSize = g_functions.getElementSize(objImage);
+		var imageWidth = imageSize.width;
+		var imageHeight = imageSize.height;
+		
+		if(imageData){
+			if(imageData.hasOwnProperty("imageWidth"))
+				imageWidth = imageData.imageWidth;
+			
+			if(imageData.hasOwnProperty("imageHeight"))
+				imageHeight = imageData.imageHeight;
+			
+		}
+		
+		if(imageWidth <= 0)
+			return(borderWidth);
+		
+		//take the less size
+		var totalSize = (imageWidth < imageHeight)?imageWidth:imageHeight;
+		var borderSize = borderWidth * 2;
+		
+		var borderRatio = borderSize / totalSize;
+		
+		if(borderRatio < g_options.slider_image_border_maxratio)
+			return(borderWidth);
+		
+		//change border width		
+		var borderWidth = (totalSize * g_options.slider_image_border_maxratio)/2; 
+		
+		borderWidth = Math.round(borderWidth);
+		
+		return(borderWidth);
+		
+	}
+	
 	
 	/**
 	 * set slider image css design according the settings
 	 */
-	function setImageDesign(objImage, slideType){
+	function setImageDesign(objImage, slideType, imageData){
 		
 		var css = {};
 		if(g_options.slider_image_border == true){
 			css["border-style"] = "solid";
-			css["border-width"] = g_options.slider_image_border_width+"px";
+			
+			var borderWidth = getImageBorderWidth(objImage, imageData);
+			
+			css["border-width"] = borderWidth+"px";
 			css["border-color"] = g_options.slider_image_border_color;
 			css["border-radius"] = g_options.slider_image_border_radius;
 		}
@@ -12735,6 +12999,7 @@ function UGSlider(){
 		objImage.css(css);
 	}
 	
+	
 	/**
 	 * scale image constant size (for video items)
 	 */
@@ -12744,7 +13009,10 @@ function UGSlider(){
 		var constantHeight = g_options.slider_video_constantsize_height;
 		var scaleMode = g_options.slider_video_constantsize_scalemode;
 		
-		g_functions.scaleImageExactSizeInParent(objImage, objItem.imageWidth, objItem.imageHeight, constantWidth, constantHeight, scaleMode);
+		var objSize = g_functions.scaleImageExactSizeInParent(objImage, objItem.imageWidth, objItem.imageHeight, constantWidth, constantHeight, scaleMode);
+		
+		
+		return(objSize);
 	}
 
 	
@@ -12782,26 +13050,37 @@ function UGSlider(){
 				g_gallery.checkFillImageSize(objImage, objItem);
 			}
 			
-			if(slideType != "image" && g_options.slider_video_constantsize == true)
-				scaleImageConstantSize(objImage, objItem);
-			else
-				g_functions.scaleImageFitParent(objImage, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
-
+			var objImageData = {};
 			
+			if(slideType != "image" && g_options.slider_video_constantsize == true){
+				objImageData = scaleImageConstantSize(objImage, objItem);
+			}
+			else{
+				objImageData = g_functions.scaleImageFitParent(objImage, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
+			}
+			
+			setImageDesign(objImage, slideType, objImageData);
 			g_objThis.trigger(t.events.AFTER_PUT_IMAGE, objSlide);
 			
 		}
 		else{		//place the image inside parent first time
-						
+			
 			objImage = g_functions.placeImageInsideParent(urlImage, objItemWrapper, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
-									
+			
 			//set image loaded on load:
 			if(objItem.isBigImageLoaded == true){
 				objImage.fadeTo(0,1);
 				hidePreloader(objPreloader);
 				
 				if(slideType != "image" && g_options.slider_video_constantsize == true)
-					scaleImageConstantSize(objImage, objItem);
+					var objImageData = scaleImageConstantSize(objImage, objItem);
+				else
+					var objImageData = g_functions.getImageInsideParentData(objItemWrapper, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
+				
+				//set missing css width
+				objImage.css("width",objImageData.imageWidth+"px");
+						
+				setImageDesign(objImage, slideType, objImageData);
 				
 				g_objThis.trigger(t.events.AFTER_PUT_IMAGE, objSlide);
 			}
@@ -12838,23 +13117,25 @@ function UGSlider(){
 					g_gallery.onItemBigImageLoaded(null, objImage);
 					
 					var objItem = g_gallery.getItem(itemIndex);
-										
+					
+					var objImageData = {};
+					
 					if(slideType != "image" && g_options.slider_video_constantsize == true)
 						scaleImageConstantSize(objImage, objItem);
-					else
-						g_functions.scaleImageFitParent(objImage, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
+					else{
+						objImageData = g_functions.scaleImageFitParent(objImage, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
+					}
 					
 					objImage.fadeTo(0,1);
+					
+					setImageDesign(objImage, slideType, objImageData);
 					
 					g_objThis.trigger(t.events.AFTER_PUT_IMAGE, objSlide);
 				});
 			}
 			
 		}
-				
 		
-		if(objImage)
-			setImageDesign(objImage, slideType);
 		
 	}
 	
@@ -13021,7 +13302,7 @@ function UGSlider(){
 		var slideSize = g_functions.getElementSize(objCurrentSlide);
 		var left = slideSize.left;
 		var top = slideSize.top;
-		
+				
 		//set by image position
 		if(g_options.slider_video_constantsize == true){
 			
@@ -13030,10 +13311,11 @@ function UGSlider(){
 			top += imageSize.top;
 			
 		}else{	//set video padding
+			
 			left += g_options.slider_video_padding_left;
 			top += g_options.slider_video_padding_top;
-		}
 		
+		}
 		
 		g_objVideoPlayer.setPosition(left, top);
 	}
@@ -13052,7 +13334,7 @@ function UGSlider(){
 		//set video design
 		var videoElement = g_objVideoPlayer.getObject();
 		
-		setImageDesign(videoElement);
+		setImageDesign(videoElement, "video");
 	}
 	
 	
@@ -13918,7 +14200,7 @@ function UGSlider(){
 	 * options: width / height
 	 */
 	this.init = function(objGallery, objOptions, optionsPrefix){
-		
+				
 		initSlider(objGallery, objOptions, optionsPrefix);
 	}
 
@@ -14379,11 +14661,13 @@ function UGSlider(){
 		
 		var objFitSize = g_functions.getImageInsideParentData(objParent, objItem.imageWidth, objItem.imageHeight, scaleMode, objPadding);
 		var objSize = g_functions.getElementSize(objImage);
+
+		var output = false;
 		
 		if(objFitSize.imageWidth == objSize.width)
-			return(true);
-		
-		return(false);
+			output = true;
+				
+		return(output);
 	}
 	
 	
@@ -14475,6 +14759,7 @@ function UGSlider(){
 		 objCssItemWrapper["left"] = g_options.slider_item_padding_left + "px";
 		 
 		 g_objSlider.find(".ug-item-wrapper").css(objCssItemWrapper);		 
+		 
 		 
 		 //set text panel size
 		 if(g_objTextPanel){
@@ -17327,10 +17612,11 @@ function UGWistiaAPI(){
 	
 	this.events = {
 			START_PLAYING: "start_playing",
-			STOP_PLAYING: "stop_playing"
+			STOP_PLAYING: "stop_playing",
+			VIDEO_ENDED: "video_ended"
 	};
 
-
+	
 	/**
 	 * check if sound cloud active
 	 */
@@ -17404,8 +17690,8 @@ function UGWistiaAPI(){
 		
 		g_player.bind('end', function(){
 			g_objThis.trigger(t.events.STOP_PLAYING);
+			g_objThis.trigger(t.events.VIDEO_ENDED);
 		});
-		
 		
 	}
 	
@@ -17496,7 +17782,8 @@ function UGSoundCloudAPI(){
 	
 	this.events = {
 			START_PLAYING: "start_playing",
-			STOP_PLAYING: "stop_playing"
+			STOP_PLAYING: "stop_playing",
+			VIDEO_ENDED: "video_ended"
 	};
 
 	/**
@@ -17581,8 +17868,8 @@ function UGSoundCloudAPI(){
 		
 		g_player.bind(SC.Widget.Events.FINISH, function(){
 			g_objThis.trigger(t.events.STOP_PLAYING);
+			g_objThis.trigger(t.events.VIDEO_ENDED);
 		});
-		
 		
 	}
 		
@@ -17654,6 +17941,7 @@ function UGSoundCloudAPI(){
 	 * destroy the player
 	 */
 	this.destroy = function(){
+		
 		g_isPlayerReady = false;
 		g_player = null;
 		
@@ -17676,7 +17964,8 @@ function UGHtml5MediaAPI(){
 	
 	this.events = {
 			START_PLAYING: "start_playing",
-			STOP_PLAYING: "stop_playing"
+			STOP_PLAYING: "stop_playing",
+			VIDEO_ENDED: "video_ended"
 	};
 	
 	/**
@@ -17784,8 +18073,8 @@ function UGHtml5MediaAPI(){
 		
 		g_ugFunctions.addEvent(g_player, "ended", function(){
 			g_objThis.trigger(t.events.STOP_PLAYING);
+			g_objThis.trigger(t.events.VIDEO_ENDED);
 		});
-						
 		
 	}
 	
@@ -17867,7 +18156,8 @@ function UGVimeoAPI(){
 	
 	this.events = {
 			START_PLAYING: "start_playing",
-			STOP_PLAYING: "stop_playing"
+			STOP_PLAYING: "stop_playing",
+			VIDEO_ENDED: "video_ended"
 	};
 	
 	/**
@@ -17961,8 +18251,8 @@ function UGVimeoAPI(){
 		
 		g_player.addEvent('finish', function(){
 			g_objThis.trigger(t.events.STOP_PLAYING);
+			g_objThis.trigger(t.events.VIDEO_ENDED);
 		});
-		
 		
 	}
 	
@@ -18099,7 +18389,8 @@ function UGYoutubeAPI(){
 	
 	this.events = {
 		START_PLAYING: "start_playing",
-		STOP_PLAYING: "stop_playing"
+		STOP_PLAYING: "stop_playing",
+		VIDEO_ENDED: "video_ended"
 	};
 	
 	
@@ -18187,7 +18478,6 @@ function UGYoutubeAPI(){
 	 */
 	function onPlayerReady(){
 		g_isPlayerReady = true;
-		
 	}
 	
 	
@@ -18203,10 +18493,14 @@ function UGYoutubeAPI(){
 		}
 		
 		var state = g_player.getPlayerState();
-				
+		
 		switch(state){
 			case YT.PlayerState.PLAYING:
 				g_objThis.trigger(t.events.START_PLAYING);
+			break;
+			case YT.PlayerState.ENDED:
+				g_objThis.trigger(t.events.STOP_PLAYING);					
+				g_objThis.trigger(t.events.VIDEO_ENDED);
 			break;
 			default:
 				if(g_prevState == YT.PlayerState.PLAYING)
@@ -18231,8 +18525,8 @@ function UGYoutubeAPI(){
 			return(true);
 		}
 		
-		g_ugFunctions.loadJs("www.youtube.com/player_api", true);
-				
+		g_ugFunctions.loadJs("https://www.youtube.com/player_api", false);
+		
 		g_ugYoutubeAPI.isAPILoaded = true;	
 		
 	}
@@ -18302,10 +18596,20 @@ function UGYoutubeAPI(){
 	 * destroy player
 	 */
 	this.destroy = function(){
-		if(g_player){
-			g_isPlayerReady = false;		
-			g_player.destroy();
+		try{
+			
+			if(g_player){
+				g_isPlayerReady = false;	
+				g_player.clearVideo();
+				g_player.destroy();
+			}
+			
+		}catch(objError){
+			
+			jQuery("#"+g_lastContainerID).html("");
+			
 		}
+		
 	}
 	
 	/**
@@ -18375,7 +18679,8 @@ function UGVideoPlayer(){
 			SHOW: "video_show",
 			HIDE: "video_hide",
 			PLAY_START: "video_play_start",
-			PLAY_STOP: "video_play_stop"
+			PLAY_STOP: "video_play_stop",
+			VIDEO_ENDED: "video_ended"
 	};
 	
 	var g_temp = {
@@ -18477,6 +18782,15 @@ function UGVideoPlayer(){
 			g_objButtonClose.show();
 	}
 	
+	/**
+	 * on video ended
+	 */
+	function onVideoEnded(){
+		
+		g_objThis.trigger(t.events.VIDEO_ENDED);
+		
+	}
+
 	
 	/**
 	 * init events
@@ -18492,20 +18806,25 @@ function UGVideoPlayer(){
 		//youtube events
 		jQuery(g_youtubeAPI).on(g_youtubeAPI.events.START_PLAYING, onPlayStart);
 		jQuery(g_youtubeAPI).on(g_youtubeAPI.events.STOP_PLAYING, onPlayStop);
+		jQuery(g_youtubeAPI).on(g_youtubeAPI.events.VIDEO_ENDED, onVideoEnded);
 		
 		//vimeo events
 		jQuery(g_vimeoAPI).on(g_vimeoAPI.events.START_PLAYING, onPlayStart);
 		jQuery(g_vimeoAPI).on(g_vimeoAPI.events.STOP_PLAYING, onPlayStop);
+		jQuery(g_vimeoAPI).on(g_vimeoAPI.events.VIDEO_ENDED, onVideoEnded);
 		
 		//html5 video events
 		jQuery(g_html5API).on(g_html5API.events.START_PLAYING, onPlayStart);
 		jQuery(g_html5API).on(g_html5API.events.STOP_PLAYING, onPlayStop);
+		jQuery(g_html5API).on(g_html5API.events.VIDEO_ENDED, onVideoEnded);
 		
 		jQuery(g_soundCloudAPI).on(g_soundCloudAPI.events.START_PLAYING, onPlayStart);
 		jQuery(g_soundCloudAPI).on(g_soundCloudAPI.events.STOP_PLAYING, onPlayStop);
+		jQuery(g_soundCloudAPI).on(g_soundCloudAPI.events.VIDEO_ENDED, onVideoEnded);
 		
 		jQuery(g_wistiaAPI).on(g_wistiaAPI.events.START_PLAYING, onPlayStart);
 		jQuery(g_wistiaAPI).on(g_wistiaAPI.events.STOP_PLAYING, onPlayStop);
+		jQuery(g_wistiaAPI).on(g_wistiaAPI.events.VIDEO_ENDED, onVideoEnded);
 		
 	}
 	
@@ -18680,7 +18999,7 @@ function UGVideoPlayer(){
 			if(player == except)
 				continue;
 			switch(player){
-				case "youtube":					
+				case "youtube":		
 					g_youtubeAPI.pause();
 					g_youtubeAPI.destroy();	
 					g_objYoutube.hide();
@@ -18720,7 +19039,6 @@ function UGVideoPlayer(){
 		stopAndHidePlayers("youtube");
 		
 		g_objYoutube.show();
-		
 		
 		var objYoutubeInner = g_objYoutube.children("#"+g_temp.youtubeInnerID);
 		if(objYoutubeInner.length == 0)
@@ -18847,7 +19165,7 @@ var g_ugWistiaAPI = new UGWistiaAPI();
 		
 		if(!options)
 			var options = {};
-		
+				
 		var objGallery = new UniteGalleryMain();
 		objGallery.run(galleryID, options);
 		
@@ -18956,7 +19274,9 @@ function UniteGalleryMain(){
 			SLIDER_ACTION_END: "slider_action_end",
 			ITEM_IMAGE_UPDATED: "item_image_updated",
 			GALLERY_KEYPRESS: "gallery_keypress",
-			GALLERY_BEFORE_REQUEST_ITEMS: "gallery_before_request_items"	//before ajax load items
+			GALLERY_BEFORE_REQUEST_ITEMS: "gallery_before_request_items",	//before ajax load items
+			OPEN_LIGHTBOX:"open_lightbox",
+			CLOSE_LIGHTBOX:"close_lightbox"			
 	};
 	
 	
@@ -19020,7 +19340,8 @@ function UniteGalleryMain(){
 		isWistiaPresent: false,			//flag if some wistia movie present
 		resizeDelay: 100,
 		isRunFirstTime: true,
-		originalOptions: {}
+		originalOptions: {},
+		funcCustomHeight: null			//custom height function, set by the theme if needed
 	};
 	
 	
@@ -19138,6 +19459,9 @@ function UniteGalleryMain(){
 				 //cache items
 				 if(g_options.gallery_enable_cache == true && g_options.gallery_initial_catid)
 					 cacheItems(g_options.gallery_initial_catid);
+				
+				 //set size class
+				 t.setSizeClass();
 				 
 				 //fill arrItems
 				 var objItems = g_objWrapper.children();
@@ -19426,6 +19750,8 @@ function UniteGalleryMain(){
 		
 		g_arrItems = [];
 		
+		var isMobile = t.isMobileMode();
+		
 		 var numIndex = 0;
 		 
 		 for(var i=0;i<arrChildren.length;i++){
@@ -19457,31 +19783,71 @@ function UniteGalleryMain(){
 					 jQuery.removeData(objChild, "lazyload-src");
 				 }
 				 
-				 var imageSrc = objChild.attr("src");
-				 var dataThumb = objChild.data("thumb");
+				 //src is thumb
+				 var urlImage = objChild.data("image");
+				 var urlThumb = objChild.data("thumb");
 				 
-				 if(typeof dataThumb != "undefined" && dataThumb != ""){
-					 objItem.urlThumb = dataThumb;
-					 objItem.urlImage = imageSrc;
-					 objChild.attr("src", dataThumb);
-				 }else{
-					 objItem.urlThumb = imageSrc;
-					 objItem.urlImage = objChild.data("image");
-				 }
+				 if(typeof(urlImage) == "undefined")
+					 urlImage = null;
+				 
+				 if(typeof(urlThumb) == "undefined")
+					 urlThumb = null;
+				 
+				 var imageSrc = objChild.attr("src");
+				 
+				 if(!urlImage)
+					 urlImage = imageSrc;
 					 
+				 if(!urlThumb)
+					 urlThumb = imageSrc;
+				 
+				 if(!urlThumb)
+					 urlThumb = urlImage;
+				 
+				 if(!urlImage)
+					 urlImage = urlThumb;
+				 
+				 
+				 objItem.urlThumb = urlThumb;
+				 objItem.urlImage = urlImage;
+				 				 
 				 objItem.title = objChild.attr("alt");
 				 
 				 //always set thumb image to object
 				 objItem.objThumbImage = objChild;
+				 
+				 objItem.objThumbImage.attr("src", objItem.urlThumb);
+				 
 			 }else{
 				 
-				 if(itemType == "image")
+				 if(itemType == "image"){
+					 trace("Problematic gallery item found:");
+					 trace(objChild);
+					 trace("Please look for some third party js script that could add this item to the gallery");
 					 throw new Error("The item should not be image type");
+				 }
 				 
 				 objItem.urlThumb = objChild.data("thumb");
 				 objItem.title = objChild.data("title");
 				 objItem.objThumbImage = null;
 				 objItem.urlImage = objChild.data("image");
+			 }
+			 
+			 
+			 //check mobile version images
+			 if(isMobile == true){
+				 
+				 var urlThumbMobile = objChild.data("thumb-mobile");
+				 if(typeof urlThumbMobile != "undefined" && urlThumbMobile != ""){
+					 objItem.urlThumb = urlThumbMobile;
+	 			 	 
+					 if(tagname == "img")
+	 					 objChild.attr("src",objItem.urlThumb);
+				 }
+				 
+				 var urlImageMobile = objChild.data("image-mobile");
+				 if(typeof urlImageMobile != "undefined" && urlImageMobile != "")
+					 objItem.urlImage = urlImageMobile;
 			 }
 			 
 			 objItem.link = itemLink;
@@ -19601,6 +19967,7 @@ function UniteGalleryMain(){
 			 numIndex++;
 			 
 		 }
+		 
 		 
 		 g_numItems = g_arrItems.length;
 		 
@@ -19863,8 +20230,8 @@ function UniteGalleryMain(){
 		 //mix options with user options
 		 if(!customOptions)
 			 var customOptions = {};
-		 
-		 customOptions = jQuery.extend(customOptions, g_temp.objCustomOptions);
+		 		 
+		 customOptions = jQuery.extend(g_temp.objCustomOptions, customOptions);
 		 
 		 g_objSlider = new UGSlider();		 
 		 g_objSlider.init(t, customOptions, optionsPrefix);
@@ -19924,21 +20291,32 @@ function UniteGalleryMain(){
 		var obj = jQuery(event.target);
 		if(obj.is("textarea") || obj.is("select") || obj.is("input"))
 			return(true);
-			
+						
 		 var keyCode = (event.charCode) ? event.charCode :((event.keyCode) ? event.keyCode :((event.which) ? event.which : 0));
+		 
+		 var wasAction = true;
 		 
 		 switch(keyCode){
 			 case 39:	//right key
 				 t.nextItem();
-				 event.preventDefault();
 			 break;
 			 case 37:	//left key
 				 t.prevItem();
-				 event.preventDefault();
 			 break;
+			 default:
+				 wasAction = false;
+			 break; 
 		 }
 		 
-		g_objGallery.trigger(t.events.GALLERY_KEYPRESS, keyCode);
+		 //only first page gallery affected
+		 
+		 if(wasAction == true){
+			 event.preventDefault();
+			 event.stopPropagation();
+			 event.stopImmediatePropagation();
+		 }
+		 
+		g_objGallery.trigger(t.events.GALLERY_KEYPRESS, [keyCode,event]);
 	}
 	
 	
@@ -19958,11 +20336,23 @@ function UniteGalleryMain(){
 				
 		if(objSize.width != g_temp.lastWidth || objSize.height != g_temp.lastHeight){
 			
-			if(g_options.gallery_preserve_ratio == true && g_temp.isFreestyleMode == false)
+			var heightWasSet = false;
+			
+			//set height with custom function (if exists)
+			if(g_temp.funcCustomHeight){
+				var newHeight = g_temp.funcCustomHeight(objSize);
+				if(newHeight){
+					g_objWrapper.height(newHeight);
+					heightWasSet = true;
+				}
+			}
+			
+			if(heightWasSet == false && g_options.gallery_preserve_ratio == true && g_temp.isFreestyleMode == false)
 				setHeightByOriginalRatio();
 			
 			storeLastSize();
 			g_objGallery.trigger(t.events.SIZE_CHANGE);
+			
 		}
 		
 	}
@@ -20064,6 +20454,12 @@ function UniteGalleryMain(){
 			 g_objWrapper.css("width","auto");
 			 g_functions.whenContiniousEventOver("gallery_resize", onGalleryResized, g_temp.resizeDelay);
 		 });
+		 
+		 //check resize once in a time, start from 10 seconds
+		 setTimeout(function(){
+			 setInterval(onGalleryResized, 2000);			 
+		 }, 10000);
+		 
 		 
 		 //fullscreen:
 		 g_functions.addFullScreenChangeEvent(onFullScreenChange);
@@ -20755,7 +21151,7 @@ function UniteGalleryMain(){
 		g_selectedItemIndex = itemIndex;
 		
 		g_objGallery.trigger(t.events.ITEM_CHANGE, [objItem,role]);
-
+		
 		//reset playback, if playing
 		if(g_temp.isPlayMode == true){
 				t.resetPlaying();
@@ -20941,7 +21337,10 @@ function UniteGalleryMain(){
 			var objSize = t.getSize();
 			var width = objSize.width;			
 		}
-				
+		
+		if(width == 0)
+			var width = jQuery(window).width();
+		
 		var addClass = "";
 		
 		if(width <= 480){
@@ -20976,6 +21375,24 @@ function UniteGalleryMain(){
 	
 	
 	/**
+	 * get if small screen
+	 */
+	this.isSmallWindow = function(){
+		
+		var windowWidth = jQuery(window).width();
+		
+		
+		if(!windowWidth)
+			return(true);
+		
+		if(windowWidth <= 480)
+			return(true);
+		
+		return(false);
+	}
+	
+	
+	/**
 	 * change gallery items
 	 */
 	this.changeItems = function(itemsContent, cacheID){
@@ -20991,6 +21408,13 @@ function UniteGalleryMain(){
 	 */
 	this.showErrorMessageReplaceGallery = function(message){
 		showErrorMessage(message);
+	}
+	
+	/**
+	 * set custom height function by width
+	 */
+	this.setFuncCustomHeight = function(func){
+		g_temp.funcCustomHeight = func;
 	}
 	
 	this.__________AJAX_REQUEST_______ = function(){};
@@ -21197,6 +21621,7 @@ function UGLightbox(){
 			topPanelHeight: 44,
 			initTextPanelHeight: 26,		//init height for compact mode
 			isOpened: false, 
+			isRightNowOpened:false,
 			putSlider: true,
 			isCompact: false,
 			fadeDuration: 300,
@@ -21283,7 +21708,7 @@ function UGLightbox(){
 		
 		g_options = jQuery.extend(g_options, g_defaults);
 		g_options = jQuery.extend(g_options, customOptions);
-	
+		
 		g_temp.originalOptions = jQuery.extend({}, g_options);
 		
 		if(g_options.lightbox_type == "compact"){
@@ -21300,7 +21725,7 @@ function UGLightbox(){
 			g_gallery.initSlider(g_options, "lightbox");
 			g_objects = gallery.getObjects();
 			g_objSlider = g_objects.g_objSlider;			
-		
+			
 		}else{
 			g_objSlider = null;
 		}
@@ -21312,7 +21737,6 @@ function UGLightbox(){
 			g_objTextPanel = null;
 		
 		
-		
 	}
 	
 	
@@ -21320,7 +21744,6 @@ function UGLightbox(){
 	 * modify some options according user options
 	 */
 	function modifyOptions(){
-		
 		
 		if(g_temp.isCompact == true && g_options.lightbox_show_textpanel == true){
 			g_options.lightbox_slider_image_padding_bottom = g_temp.initTextPanelHeight;
@@ -21339,6 +21762,9 @@ function UGLightbox(){
 			g_temp.topPanelHeight = 0;
 			g_options.lightbox_slider_image_padding_top = 0;
 		}
+		
+		//modify slider image border width
+		
 		
 	}
 	
@@ -21463,8 +21889,7 @@ function UGLightbox(){
 				
 		//set slider new image position
 		var objOptions = {
-				slider_image_padding_top: newHeight,
-				slider_video_padding_top: newHeight
+				slider_image_padding_top: newHeight
 		};
 		
 		g_objSlider.setOptions(objOptions);
@@ -21478,7 +21903,7 @@ function UGLightbox(){
 	/**
 	 * handle panel height according text height
 	 */
-	function handlePanelHeight(){
+	function handlePanelHeight(fromWhere){
 		
 		if(!g_objTopPanel)
 			return(false);
@@ -21491,22 +21916,26 @@ function UGLightbox(){
 		if(panelHeight == 0)
 			return(false);
 		
+		if(g_objTopPanel.is(":visible") == false)
+			return(false);
+		
 		var newPanelHeight = panelHeight;
 		
-		var textPanelHeight = g_objTextPanel.getSize().height;
+		var objTextPanelSize = g_objTextPanel.getSize();
+		
+		var textPanelHeight = objTextPanelSize.height;
 		
 		if(panelHeight != g_temp.topPanelHeight)
 			newPanelHeight = g_temp.topPanelHeight;
-		
+				
 		if(textPanelHeight > newPanelHeight)
 			newPanelHeight = textPanelHeight;
-		
+				
 		if(panelHeight != newPanelHeight){
 			g_objTopPanel.height(newPanelHeight);
-						
+			
 			if(g_objSlider && g_objSlider.isAnimating() == false)
 				refreshSliderItem(newPanelHeight);
-			
 		}
 				
 	}
@@ -21550,7 +21979,7 @@ function UGLightbox(){
 		
 		g_objTextPanel.refresh(true, true);
 		
-		handlePanelHeight();
+		handlePanelHeight("positionTextPanelWide");
 		g_objTextPanel.positionPanel();
 	}
 	
@@ -21558,7 +21987,7 @@ function UGLightbox(){
 	 * hide top panel
 	 */
 	function hideTopPanel(){
-		
+				
 		if(!g_objTopPanel)
 			return(false);
 		
@@ -21647,7 +22076,7 @@ function UGLightbox(){
 		}
 		
 		g_temp.textPanelTop = objImageSize.bottom;
-				
+		
 		if(positionPanel === true)
 			g_objTextPanel.positionPanel(g_temp.textPanelTop, g_temp.textPanelLeft);
 	}
@@ -21683,6 +22112,7 @@ function UGLightbox(){
 			var numbersLeft = objImageSize.right - objNumbersSize.width;
 			g_functions.placeElement(g_objNumbers, numbersLeft, g_temp.textPanelTop);
 		}
+			
 			
 		if(g_objTextPanel){
 			g_objTextPanel.show();
@@ -21728,7 +22158,7 @@ function UGLightbox(){
 	 * position the arrows inside mode
 	 */
 	function positionArrowsInside(toShow, isAnimation){
-		
+				
 		if(g_temp.isArrowsInside == false)
 			return(false);
 		
@@ -21795,6 +22225,7 @@ function UGLightbox(){
 			g_functions.placeElement(g_objArrowLeft, leftArrowLeft, leftArrowTop);
 			g_functions.placeElement(g_objArrowRight, rightArrowLeft, rightArrowTop);
 		}
+		
 		
 		if(toShow == true)
 			showArrows(isAnimation);
@@ -22231,7 +22662,6 @@ function UGLightbox(){
 		
 		positionArrowsInside(true);
 		
-		
 		handleCompactTextpanelSizes();
 	}
 	
@@ -22262,28 +22692,26 @@ function UGLightbox(){
 			
 			positionCloseButton(true);
 			positionArrowsInside(true);
-			
+
 			if(g_objSlider.isSlideActionActive() == false){
 				var isChanged = handleCompactHeight();
 				if(isChanged == false)
 					handleCompactTextpanelSizes();
-				
-				showTextPanel();
-				showNumbers();
 			}
+			
+			showTextPanel();
+			showNumbers();
 			
 		}
 		
 	}
 	
 		
-	
 	/**
 	 * on item change
 	 * update numbers text and text panel text/position
 	 */
 	function onItemChange(data, currentItem){
-		
 		
 		if(g_temp.isCompact == false){	//wide mode
 			
@@ -22293,9 +22721,13 @@ function UGLightbox(){
 			if(g_objTextPanel){
 				updateTextPanelText(currentItem);
 				
-				g_objTextPanel.positionElements(false);
-				handlePanelHeight();
-				g_objTextPanel.positionPanel();
+				//update panel height only if the lightbox is already opened, and the items changed within it.
+				if(g_temp.isRightNowOpened == false){
+					g_objTextPanel.positionElements(false);
+					handlePanelHeight("onchange");
+					g_objTextPanel.positionPanel();
+				}
+				
 			}
 			
 		}else{
@@ -22385,6 +22817,7 @@ function UGLightbox(){
 
 		if(g_objTopPanel){
 			showTopPanel();
+			handlePanelHeight("onStopVideo");
 		}else{
 			
 			if(g_objNumbers)
@@ -22401,14 +22834,26 @@ function UGLightbox(){
 	/**
 	 * on gallery keypres, do operations
 	 */
-	function onKeyPress(data, key){
+	function onKeyPress(data, key, event){
+		
+		var isScrollKey = false;
 		
 		switch(key){
 			case 27:		//escape - close lightbox
 				if(g_temp.isOpened == true)
 					t.close("keypress");
 			break;
+			case 38:	//up and down arrows
+			case 40:
+			case 33:	//page up and down
+			case 34:
+				isScrollKey = true;
+			break;
 		}
+		
+		if(g_temp.isOpened == true && isScrollKey == true)
+			event.preventDefault();
+		
 		
 	}
 	
@@ -22609,6 +23054,10 @@ function UGLightbox(){
 		
 		g_temp.isOpened = true;
 		
+		//set if the panel right now opened
+		g_temp.isRightNowOpened = true;
+		setTimeout(function(){g_temp.isRightNowOpened = false},100);
+		
 		if(g_objSlider){
 			g_objSlider.setItem(objItem, "lightbox_open");
 		}
@@ -22644,9 +23093,12 @@ function UGLightbox(){
 			}
 				
 		}
-				
+		
 		if(g_objSlider)
 			g_objSlider.startSlideAction();
+		
+		//trigger gallery event
+		g_objGallery.trigger(g_gallery.events.OPEN_LIGHTBOX, objItem);
 		
 	}
 	
@@ -22673,6 +23125,8 @@ function UGLightbox(){
 				g_objWrapper.hide();
 			});
 		}
+
+		g_objGallery.trigger(g_gallery.events.CLOSE_LIGHTBOX);
 		
 	}
 	
@@ -22693,9 +23147,12 @@ function UGLightbox(){
 		g_temp.isCompact = false;
 		modifyOptions();
 		
+		g_temp.isArrowsInside = false;
+		g_temp.isArrowsOnHoverMode = false;
+	
 		g_options = jQuery.extend({}, g_temp.originalOptions);
 		
-		trace(g_options);
+		g_options.lightbox_arrows_position = "sides";
 		
 		g_objSlider.setOptions(g_options);
 	}
@@ -22707,8 +23164,9 @@ function UGLightbox(){
 	this.putHtml = function(){
 		
 		//check if switch to wide mode
-		var isMobile = g_gallery.isMobileMode();
-		if(isMobile && g_temp.isCompact == true)
+		var isSmallWindow = g_gallery.isSmallWindow();
+		
+		if(isSmallWindow && g_temp.isCompact == true)
 			switchToWide();
 		
 		putLightboxHtml();
@@ -23939,13 +24397,17 @@ function UG_API(gallery){
 	
 	var t = this, g_objThis = jQuery(t);
 	var g_gallery = new UniteGalleryMain(), g_objGallery;
+	var g_arrEvents = [];
+	
 	g_gallery = gallery;
 	g_objGallery = jQuery(gallery);
+	
 	
 	this.events = {
 			API_INIT_FUNCTIONS:"api_init",
 			API_ON_EVENT:"api_on_event"
 	}
+	
 	
 	/**
 	 * get item data for output
@@ -23980,7 +24442,12 @@ function UG_API(gallery){
 	/**
 	 * event handling function
 	 */
-	this.on = function(event, handlerFunction){
+	this.on = function(event, handlerFunction, notCache){
+		
+		//remember cache
+		if(notCache !== true){
+			g_arrEvents.push({event:event,func:handlerFunction});
+		}
 		
 		switch(event){
 			case "item_change":
@@ -24011,7 +24478,13 @@ function UG_API(gallery){
 				g_objGallery.on(g_gallery.events.PAUSE_PLAYING, handlerFunction);				
 			break;
 			case "continue":
-				g_objGallery.on(g_gallery.events.CONTINUE_PLAYING, handlerFunction);				
+				g_objGallery.on(g_gallery.events.CONTINUE_PLAYING, handlerFunction);
+			break;
+			case "open_lightbox":
+				g_objGallery.on(g_gallery.events.OPEN_LIGHTBOX, handlerFunction);
+			break;
+			case "close_lightbox":
+				g_objGallery.on(g_gallery.events.CLOSE_LIGHTBOX, handlerFunction);
 			break;
 			default:
 				if(console)
@@ -24171,6 +24644,12 @@ function UG_API(gallery){
 			var customOptions = {};
 		
 		g_gallery.run(null, customOptions);
+		
+		//restore events:
+		g_arrEvents.map(function(obj){
+			t.on(obj.event,obj.func,true);
+		});
+		
 	}
 	
 	

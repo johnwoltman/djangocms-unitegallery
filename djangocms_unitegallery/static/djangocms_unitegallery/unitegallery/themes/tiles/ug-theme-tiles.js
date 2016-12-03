@@ -22,16 +22,16 @@ function UGTheme_tiles(){
 			theme_gallery_padding: 0,			//the horizontal padding of the gallery from the sides
 			theme_appearance_order: "normal",	//normal, shuffle, keep - the appearance order of the tiles. applying only to columns type
 			theme_auto_open:null,				//auto open lightbox at start
-            tiles_type: "justified",
-            tile_enable_textpanel: true,
-            tile_textpanel_title_text_align: "center",
-            tile_textpanel_always_on: false,
-            tile_textpanel_source: "desc",
-            lightbox_show_numbers: true,                  //show numbers on the right side
-            lightbox_show_textpanel: true,                      //show the text panel
-            lightbox_textpanel_width: 550,                        //the width of the text panel. wide type only
-            lightbox_textpanel_enable_title: true,              //enable the title text
-            lightbox_textpanel_enable_description: true      //enable the description text
+			tiles_type: "justified",
+			tile_enable_textpanel: true,
+			tile_textpanel_title_text_align: "center",
+			tile_textpanel_always_on: false,
+			tile_textpanel_source: "desc",
+			lightbox_show_numbers: true,                  //show numbers on the right side
+			lightbox_show_textpanel: true,                      //show the text panel
+			lightbox_textpanel_width: 550,                        //the width of the text panel. wide type only
+			lightbox_textpanel_enable_title: true,              //enable the title text
+			lightbox_textpanel_enable_description: true      //enable the description text
 	};
 	
 	var g_defaults = {
@@ -75,6 +75,7 @@ function UGTheme_tiles(){
 		g_lightbox.init(gallery, g_options);
 		
 		g_objTileDesign = g_tiles.getObjTileDesign();
+
 		
 	}
 	

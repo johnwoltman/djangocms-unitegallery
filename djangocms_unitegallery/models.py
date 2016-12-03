@@ -75,6 +75,8 @@ class Gallery(CMSPlugin):
 
 @python_2_unicode_compatible
 class GalleryPhoto(models.Model):
+    class Meta:
+        ordering = ['image']
     image = models.ImageField(_("Photo"), upload_to=get_media_path)
     title = models.CharField(
         _("Title"),
